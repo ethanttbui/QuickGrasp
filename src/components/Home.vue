@@ -66,5 +66,14 @@ export default {
   .button {
     height: 3.5rem;
     font-size: $size-5;
+    &:hover {
+      background-color: $green !important;
+      color: $white !important;
+    }
+    &:active {
+      background-color: $white !important;
+      color: $green !important;
+      box-shadow:none;
+    }
   }
 </style>
