@@ -10,5 +10,6 @@ export default {
 }
 </script>
 
-<style>
+<style lang="sass-loader">
+  @import '~bulma/bulma.sass';
 </style>
