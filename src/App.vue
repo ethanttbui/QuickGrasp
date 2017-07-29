@@ -1,15 +1,20 @@
 <template>
-  <div id="app">
+	<div>
+  	<NavBar></NavBar>
     <router-view></router-view>
   </div>
 </template>
 
 <script>
+import NavBar from './components/NavBar'
+
 export default {
-  name: 'app'
+  name: 'app',
+  components: { NavBar }
 }
 </script>
 
 <style lang="sass-loader">
-  @import '~bulma/bulma.sass';
+	@import './assets/bulma-override';
+	@import '~bulma/bulma';
 </style>

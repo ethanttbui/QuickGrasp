@@ -1,10 +1,10 @@
 <template>
-  <section class="hero is-success is-fullheight">
+  <section class="hero is-primary is-bold is-fullheight">
     <!-- Hero content: will be in the middle -->
     <div class="hero-body">
       <div class="container has-text-centered">
 
-        <!-- page title -->
+        <!-- page title and subtitle -->
         <h1 class="title">
           QuickGrasp
         </h1>
@@ -37,8 +37,8 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="sass-loader" scoped>
-  @import '~bulma/sass/utilities/mixins.sass';
-  @import '~bulma/sass/utilities/variables.sass';
+  @import '~bulma/sass/utilities/mixins';
+  @import '~bulma/sass/utilities/variables';
 
   .title {
     font-size: 3.5rem;
@@ -51,29 +51,24 @@ export default {
   .field {
     margin: 0 20% 0 20%;
     @include mobile {
-      margin: 0 10% 0 10%;
+      margin: 0 5% 0 5%;
     }
-  }
 
-  .input {
-    box-shadow: none;
-    border: none;
-    height: 3.5rem;
-    font-size: $size-5;
-    font-weight: $weight-light;
-  }
-
-  .button {
-    height: 3.5rem;
-    font-size: $size-5;
-    &:hover {
-      background-color: $green !important;
-      color: $white !important;
+    .input {
+      box-shadow: none;
+      border: none;
+      height: 3.5rem;
+      font-size: $size-5;
+      font-weight: $weight-light;
     }
-    &:active {
-      background-color: $white !important;
-      color: $green !important;
-      box-shadow:none;
+
+    .button {
+      height: 3.5rem;
+      font-size: $size-5;
+      &:hover {
+        background-color: transparent !important;
+        color: $white !important;
+      }
     }
   }
 </style>
