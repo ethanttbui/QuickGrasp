@@ -1,9 +1,11 @@
 <template>
 	<nav class="navbar is-transparent has-shadow">
+
+		<!-- brand section with logo and burger icon -->
 	  <div class="navbar-brand" :class="{ 'has-border':isActive }">
-	    <a class="navbar-item" href="/">
+	    <router-link to="/" class="navbar-item">
 	      QuickGrasp
-	    </a>
+	    </router-link>
 
 	    <div class="navbar-burger" :class="{ 'is-active':isActive }" @click="toggleNavMenu">
 	      <span></span>
@@ -12,14 +14,15 @@
 	    </div>
 	  </div>
 
+		<!-- main navigation menu -->
 	  <div class="navbar-menu" :class="{ 'is-active':isActive }">
 	    <div class="navbar-end">
-	    	<a class="navbar-item">
+	    	<router-link to="/browse" class="navbar-item">
 	    		Browse Concepts
-	    	</a>
-	    	<a class="navbar-item">
+	    	</router-link>
+	    	<router-link to="/explain" class="navbar-item">
 	    		Explain Concepts
-	    	</a>
+	    	</router-link>
 	    	<a class="navbar-item">
 	    		<a class="button is-warning">
             <span>Login</span>
@@ -30,6 +33,7 @@
 	    	</a>
 	    </div>
 	  </div>
+
 	</nav>
 </template>
 
@@ -53,6 +57,7 @@
 
 <style lang="sass-loader" scoped>
   @import '~bulma/sass/utilities/_all';
+  @import '../assets/sass/variables';
 
 	.navbar {
 		position: fixed;

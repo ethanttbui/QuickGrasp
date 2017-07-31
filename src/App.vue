@@ -1,7 +1,16 @@
 <template>
-	<div>
+	<div id="app">
+
+		<!-- navigation bar -->
   	<NavBar></NavBar>
-    <router-view></router-view>
+
+		<!-- hero container containing router view -->
+  	<section class="hero is-primary is-bold is-fullheight">
+	    <div class="hero-body">
+    		<router-view></router-view>
+    	</div>
+  	</section>
+
   </div>
 </template>
 
