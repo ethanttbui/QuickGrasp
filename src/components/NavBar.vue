@@ -1,19 +1,18 @@
 <template>
 	<nav class="navbar is-transparent has-shadow">
-	  <div class="navbar-brand">
+	  <div class="navbar-brand" :class="{ 'has-border':isActive }">
 	    <a class="navbar-item" href="/">
 	      QuickGrasp
 	    </a>
 
-	    <div class="navbar-burger">
+	    <div class="navbar-burger" :class="{ 'is-active':isActive }" @click="toggleNavMenu">
 	      <span></span>
 	      <span></span>
 	      <span></span>
 	    </div>
 	  </div>
 
-	  <div class="navbar-menu">
-	    <div class="navbar-start"></div>
+	  <div class="navbar-menu" :class="{ 'is-active':isActive }">
 	    <div class="navbar-end">
 	    	<a class="navbar-item">
 	    		Browse Concepts
@@ -22,7 +21,12 @@
 	    		Explain Concepts
 	    	</a>
 	    	<a class="navbar-item">
-	    		Profile
+	    		<a class="button is-warning">
+            <span>Login</span>
+            <span class="icon">
+              <i class="fa fa-user-circle"></i>
+            </span>
+          </a>
 	    	</a>
 	    </div>
 	  </div>
@@ -30,36 +34,53 @@
 </template>
 
 <script>
-	export default {
-	  name: 'navbar'
-	}
+  export default {
+    name: 'navbar',
+
+    data () {
+      return {
+        isActive: false
+      }
+    },
+
+    methods: {
+      toggleNavMenu () {
+        this.isActive = !this.isActive
+      }
+    }
+  }
 </script>
 
 <style lang="sass-loader" scoped>
-	@import '~bulma/sass/utilities/variables';
+  @import '~bulma/sass/utilities/_all';
 
 	.navbar {
 		position: fixed;
 		width: 100%;
-		background-color: $info;
-		
+		background-color: transparent;
+    border-bottom: 1px solid #fff;
 
-		.navbar-item {
-			color: $white;
-			&:hover {
-				background-color: transparent;
-			}
-		}
+  	.navbar-burger {
+  		span {
+  			background-color: #fff;
+  			height: 2px;
+  		}
+  		&:hover {
+  			background-color: transparent;
+  		}
+  	}
 
-		.navbar-burger {
-			span {
-				background-color: $white;
-				height: 2px;
-			}
+    .navbar-item {
+      color: #fff;
+      &:hover {
+        background-color: transparent;
+      }
+    }
+  }
 
-			&:hover {
-				background-color: transparent;
-			}
-		}
-	}
+  .has-border {
+    @include touch {
+      border-bottom: 1px solid #fff;
+    }
+  }
 </style>

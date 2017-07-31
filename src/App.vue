@@ -14,7 +14,4 @@ export default {
 }
 </script>
 
-<style lang="sass-loader">
-	@import './assets/bulma-override';
-	@import '~bulma/bulma';
-</style>
+<style lang="sass-loader"></style>

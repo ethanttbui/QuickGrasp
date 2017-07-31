@@ -37,8 +37,8 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="sass-loader" scoped>
-  @import '~bulma/sass/utilities/mixins';
-  @import '~bulma/sass/utilities/variables';
+  @import '~bulma/sass/utilities/_all';
+  @import '../assets/sass/variables';
 
   .title {
     font-size: 3.5rem;
@@ -58,16 +58,15 @@ export default {
       box-shadow: none;
       border: none;
       height: 3.5rem;
-      font-size: $size-5;
-      font-weight: $weight-light;
+      font-size: 1.25rem;
     }
 
     .button {
       height: 3.5rem;
-      font-size: $size-5;
+      font-size: 1.25rem;
       &:hover {
         background-color: transparent !important;
-        color: $white !important;
+        color: #fff !important;
       }
     }
   }
