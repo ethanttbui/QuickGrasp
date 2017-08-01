@@ -39,7 +39,7 @@
 
 <script>
   export default {
-    name: 'navbar',
+    name: 'NavBar',
 
     data () {
       return {
@@ -62,7 +62,7 @@
 	.navbar {
 		position: fixed;
 		width: 100%;
-		background-color: $primary-color;
+		background-color: $primary-color-darker;
     border-bottom: 1px solid #fff;
     z-index: map-get($zindex, navbar);
 

@@ -29,13 +29,14 @@
 
 <script>
 export default {
-  name: 'home'
+  name: 'Home'
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="sass-loader" scoped>
   @import '~bulma/sass/utilities/_all';
+  @import '~@/assets/sass/variables';
 
   .field {
     margin: 0 20% 0 20%;
@@ -54,7 +55,7 @@ export default {
       font-size: 1.25rem;
 
       &:hover {
-        background-color: transparent !important;
+        background-color: $primary-color-darker !important;
         color: #fff !important;
       }
     }

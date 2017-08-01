@@ -9,32 +9,20 @@
       - Albert Einstein -
     </p>
 
-    <!-- explain-concept form -->
+    <!-- explain concept form -->
     <div class="box">
 
-      <!-- concept title -->
+      <!-- concept title input field -->
       <div class="field is-horizontal">
         <div class="field-label is-normal">
           <label class="label">Concept</label>
         </div>
         <div class="field-body">
-
-          <!-- concept's name / title -->
           <div class="field">
-            <p class="control is-expanded has-icons-left">
+            <p class="control has-icons-left">
               <input class="input" type="text" placeholder="Concept Name / Title">
               <span class="icon is-small is-left">
-                <i class="fa fa-font"></i>
-              </span>
-            </p>
-          </div>
-
-          <!-- keywords / tags -->
-          <div class="field">
-            <p class="control is-expanded has-icons-left has-icons-right">
-              <input class="input" type="email" placeholder="Keywords (Key 1, Key 2, Key 3)">
-              <span class="icon is-small is-left">
-                <i class="fa fa-key"></i>
+                <i class="fa fa-book"></i>
               </span>
             </p>
           </div>
@@ -42,14 +30,12 @@
         </div>
       </div>
 
-      <!-- category dropdown -->
+      <!-- category button -->
       <div class="field is-horizontal">
         <div class="field-label is-normal">
           <label class="label">Category</label>
         </div>
         <div class="field-body">
-
-          <!-- category -->
           <div class="field is-narrow">
             <div class="control">
               <div class="button is-inverted is-outlined">
@@ -61,47 +47,24 @@
         </div>
       </div>
 
-      <!-- explanation texarea -->
+      <!-- load TextEditor component -->
       <div class="field is-horizontal">
         <div class="field-label is-normal">
           <label class="label">Explanation</label>
         </div>
         <div class="field-body">
-          <div class="field">
-            <div class="control">
-              <textarea class="textarea" rows="10" placeholder="Explain how you understand the concept within 300 words"></textarea>
-            </div>
-          </div>
+          <TextEditor></TextEditor>
         </div>
       </div>
 
-      <!-- source input -->
-       <div class="field is-horizontal">
-        <div class="field-label is-normal">
-          <label class="label">Sources</label>
-        </div>
-        <div class="field-body">
-          <div class="field has-addons">
-            <div class="control">
-              <input class="input" type="text" placeholder="http://www.example.com">
-            </div>
-            <div class="control">
-              <a class="button">
-                Add Source
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- submit button -->
+      <!-- control buttons -->
       <div class="field is-horizontal">
         <div class="field-label"></div>
         <div class="field-body">
           <div class="field is-grouped">
             <div class="control">
               <button class="button">
-                Save
+                Save Draft
               </button>
             </div>
             <div class="control">
@@ -119,8 +82,11 @@
 </template>
 
 <script>
+  import TextEditor from '@/components/TextEditor'
+
   export default {
-    name: 'explain'
+    name: 'Explain',
+    components: { TextEditor }
   }
 </script>
 

@@ -15,7 +15,7 @@ export default new Router({
 
     {
       path: '/explain',
-      name: 'explain',
+      name: 'Explain',
       component: Explain
     }
   ]
