@@ -16,7 +16,10 @@
       </div>
       <div class="control">
         <a class="button is-primary is-inverted is-outlined">
-          Search
+          <span class="icon">
+            <i class="fa fa-search"></i>
+          </span>
+          <span class="is-hidden-mobile">Search</span>
         </a>
       </div>
     </div>
@@ -33,7 +36,6 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="sass-loader" scoped>
   @import '~bulma/sass/utilities/_all';
-  @import '../assets/sass/variables';
 
   .field {
     margin: 0 20% 0 20%;
@@ -42,7 +44,6 @@ export default {
     }
 
     .input {
-      box-shadow: none;
       border: none;
       height: 3.5rem;
       font-size: 1.25rem;
@@ -51,6 +52,7 @@ export default {
     .button {
       height: 3.5rem;
       font-size: 1.25rem;
+
       &:hover {
         background-color: transparent !important;
         color: #fff !important;

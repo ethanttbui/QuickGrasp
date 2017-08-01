@@ -25,10 +25,10 @@
 	    	</router-link>
 	    	<a class="navbar-item">
 	    		<a class="button is-warning">
-            <span>Login</span>
             <span class="icon">
               <i class="fa fa-user-circle"></i>
             </span>
+            <span>Login</span>
           </a>
 	    	</a>
 	    </div>
@@ -57,13 +57,14 @@
 
 <style lang="sass-loader" scoped>
   @import '~bulma/sass/utilities/_all';
-  @import '../assets/sass/variables';
+  @import '~@/assets/sass/variables';
 
 	.navbar {
 		position: fixed;
 		width: 100%;
-		background-color: transparent;
+		background-color: $primary-color;
     border-bottom: 1px solid #fff;
+    z-index: map-get($zindex, navbar);
 
   	.navbar-burger {
   		span {

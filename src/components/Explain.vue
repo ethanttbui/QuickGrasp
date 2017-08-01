@@ -2,11 +2,11 @@
 	<div class="container has-text-centered">
 
     <!-- Einstein's quote -->
-		<p class="title is-4">
-      "If you can't explain it simply, you don't understand it well enough."
+		<p class="title is-5">
+      <i>"If you can't explain it simply, you don't understand it well enough."</i>
     </p>
 		<p class="subtitle is-6">
-      <i>- Albert Einstein -</i>
+      - Albert Einstein -
     </p>
 
     <!-- explain-concept form -->
@@ -19,25 +19,22 @@
         </div>
         <div class="field-body">
 
-          <!-- concept's name -->
+          <!-- concept's name / title -->
           <div class="field">
             <p class="control is-expanded has-icons-left">
-              <input class="input" type="text" placeholder="Concept's name">
+              <input class="input" type="text" placeholder="Concept Name / Title">
               <span class="icon is-small is-left">
-                <i class="fa fa-user"></i>
+                <i class="fa fa-font"></i>
               </span>
             </p>
           </div>
 
-          <!-- keywords -->
+          <!-- keywords / tags -->
           <div class="field">
             <p class="control is-expanded has-icons-left has-icons-right">
-              <input class="input is-success" type="email" placeholder="Keywords">
+              <input class="input" type="email" placeholder="Keywords (Key 1, Key 2, Key 3)">
               <span class="icon is-small is-left">
-                <i class="fa fa-envelope"></i>
-              </span>
-              <span class="icon is-small is-right">
-                <i class="fa fa-check"></i>
+                <i class="fa fa-key"></i>
               </span>
             </p>
           </div>
@@ -55,29 +52,8 @@
           <!-- category -->
           <div class="field is-narrow">
             <div class="control">
-              <div class="select is-fullwidth">
-                <select>
-                  <option>Category</option>
-                  <option>Computer Science</option>
-                  <option>Philosophy</option>
-                  <option>Business</option>
-                  <option>Others</option>
-                </select>
-              </div>
-            </div>
-          </div>
-
-          <!-- sub-category -->
-          <div class="field is-narrow">
-            <div class="control">
-              <div class="select is-fullwidth">
-                <select>
-                  <option>Subcategory</option>
-                  <option>Algorithms</option>
-                  <option>Machine Learning</option>
-                  <option>Artificial Intelligenge</option>
-                  <option>Others</option>
-                </select>
+              <div class="button is-inverted is-outlined">
+                Select Category
               </div>
             </div>
           </div>
@@ -93,7 +69,45 @@
         <div class="field-body">
           <div class="field">
             <div class="control">
-              <textarea class="textarea" rows=10 placeholder="Explain how you understand the concept"></textarea>
+              <textarea class="textarea" rows="10" placeholder="Explain how you understand the concept within 300 words"></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- source input -->
+       <div class="field is-horizontal">
+        <div class="field-label is-normal">
+          <label class="label">Sources</label>
+        </div>
+        <div class="field-body">
+          <div class="field has-addons">
+            <div class="control">
+              <input class="input" type="text" placeholder="http://www.example.com">
+            </div>
+            <div class="control">
+              <a class="button">
+                Add Source
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- submit button -->
+      <div class="field is-horizontal">
+        <div class="field-label"></div>
+        <div class="field-body">
+          <div class="field is-grouped">
+            <div class="control">
+              <button class="button">
+                Save
+              </button>
+            </div>
+            <div class="control">
+              <button class="button is-warning">
+                Submit
+              </button>
             </div>
           </div>
         </div>
@@ -110,4 +124,8 @@
   }
 </script>
 
-<style lang="sass-loader" scoped></style>
+<style lang="sass-loader" scoped>
+  .container {
+    top: 2rem;
+  }
+</style>
