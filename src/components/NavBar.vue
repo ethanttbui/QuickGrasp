@@ -56,19 +56,19 @@
 </script>
 
 <style lang="sass-loader" scoped>
-  @import '~bulma/sass/utilities/_all';
+  @import '~@/assets/sass/mixins';
   @import '~@/assets/sass/variables';
 
 	.navbar {
 		position: fixed;
 		width: 100%;
-		background-color: $primary-color-darker;
-    border-bottom: 1px solid #fff;
+		background-color: $main-darker;
+    border-bottom: 1px solid $main-invert;
     z-index: map-get($zindex, navbar);
 
   	.navbar-burger {
   		span {
-  			background-color: #fff;
+  			background-color: $main-invert;
   			height: 2px;
   		}
   		&:hover {
@@ -77,7 +77,7 @@
   	}
 
     .navbar-item {
-      color: #fff;
+      color: $main-invert;
       &:hover {
         background-color: transparent;
       }
@@ -86,7 +86,7 @@
 
   .has-border {
     @include touch {
-      border-bottom: 1px solid #fff;
+      border-bottom: 1px solid $main-invert;
     }
   }
 </style>

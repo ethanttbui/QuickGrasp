@@ -1,6 +1,16 @@
+@import '~bulma/sass/utilities/functions';
+
 // colors
-$primary-color: hsl(172, 47%, 48%);
-$primary-color-darker: hsl(172, 47%, 47%);
+$main: hsl(172, 47%, 48%);
+$main-darker: hsl(172, 47%, 47%);
+$main-invert: findColorInvert($main);
+
+$gray: hsl(0, 0%, 86%);
+$gray-darker: hsl(0, 0%, 71%);
+
+//fonts
+$font: BlinkMacSystemFont, -apple-system, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+$font-size-normal: 1rem;
 
 //$button-color: hsl(48,  100%, 67%);
 

@@ -1,11 +1,20 @@
 //	import font-awesome
-$fa-font-path: "~font-awesome/fonts";
+$fa-font-path: '~font-awesome/fonts';
 @import '~font-awesome/scss/font-awesome';
 
+// import custom variables
+@import '~@/assets/sass/variables';
 
 // import and customize bulma
 @import '~bulma/sass/utilities/initial-variables';
-
-$turquoise: hsl(172, 47%, 48%);
-
+$turquoise: $main; // override Bulma's turquoise color
 @import '~bulma/bulma';
+
+
+/*****************/
+/* GLOBAL STYLES */
+/*****************/
+
+.input {
+	box-shadow: none;
+}

@@ -1,5 +1,5 @@
 <template>
-	<div id="app">
+  <div>
 
 		<!-- navigation bar -->
   	<NavBar></NavBar>
@@ -10,7 +10,7 @@
     		<router-view></router-view>
     	</div>
   	</section>
-
+    
   </div>
 </template>
 

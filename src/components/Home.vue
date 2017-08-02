@@ -35,7 +35,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="sass-loader" scoped>
-  @import '~bulma/sass/utilities/_all';
+  @import '~@/assets/sass/mixins';
   @import '~@/assets/sass/variables';
 
   .field {
@@ -55,8 +55,8 @@ export default {
       font-size: 1.25rem;
 
       &:hover {
-        background-color: $primary-color-darker !important;
-        color: #fff !important;
+        background-color: $main-darker !important;
+        color: $main-invert !important;
       }
     }
   }

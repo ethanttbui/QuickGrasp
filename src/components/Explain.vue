@@ -1,15 +1,17 @@
 <template>
-	<div class="container has-text-centered">
+	<div class="container">
 
     <!-- Einstein's quote -->
-		<p class="title is-5">
-      <i>"If you can't explain it simply, you don't understand it well enough."</i>
-    </p>
-		<p class="subtitle is-6">
-      - Albert Einstein -
-    </p>
+    <div class="headline has-text-centered">
+  		<p class="title is-5">
+        <i>"If you can't explain it simply, you don't understand it well enough."</i>
+      </p>
+  		<p class="subtitle is-6">
+        - Albert Einstein -
+      </p>
+    </div>
 
-    <!-- explain concept form -->
+    <!-- a box that contains the entire form -->
     <div class="box">
 
       <!-- concept title input field -->
@@ -26,7 +28,6 @@
               </span>
             </p>
           </div>
-
         </div>
       </div>
 
@@ -38,16 +39,15 @@
         <div class="field-body">
           <div class="field is-narrow">
             <div class="control">
-              <div class="button is-inverted is-outlined">
+              <a class="button is-inverted is-outlined">
                 Select Category
-              </div>
+              </a>
             </div>
           </div>
-
         </div>
       </div>
 
-      <!-- load TextEditor component -->
+      <!-- TextEditor component -->
       <div class="field is-horizontal">
         <div class="field-label is-normal">
           <label class="label">Explanation</label>
@@ -63,14 +63,14 @@
         <div class="field-body">
           <div class="field is-grouped">
             <div class="control">
-              <button class="button">
+              <a class="button">
                 Save Draft
-              </button>
+              </a>
             </div>
             <div class="control">
-              <button class="button is-warning">
+              <a class="button is-warning">
                 Submit
-              </button>
+              </a>
             </div>
           </div>
         </div>
@@ -91,7 +91,13 @@
 </script>
 
 <style lang="sass-loader" scoped>
-  .container {
-    top: 2rem;
+  .container {    
+    .headline {
+      padding: 2rem 0 1.5rem 0;
+    }
+
+    .input {
+      border-radius: 0;
+    } 
   }
 </style>
