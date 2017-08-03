@@ -6,6 +6,7 @@
 
 <script>
   import { quillEditor } from 'vue-quill-editor'
+
   export default {
     name: 'TextEditor',
 
@@ -13,13 +14,27 @@
       return {
         content: '',
 
+        // options for customizing Quill text editor:
+        // choose which tools to appear in the toolbar
+        // undo and redo tools need to be given a handler
         editorOptions: {
           modules: {
-            toolbar: [
-              ['bold', 'italic'],
-              [{ 'list': 'ordered' }, { 'list': 'bullet' }, 'blockquote', 'code-block'],
-              ['link', 'image']
-            ]
+            toolbar: {
+              container: [
+                ['bold', 'italic'],
+                [{ 'list': 'ordered' }, { 'list': 'bullet' }, 'blockquote', 'code-block'],
+                ['link', 'image'],
+                ['undo', 'redo']
+              ],
+              handlers: {
+                'undo': function () {
+                  this.quill.history.undo()
+                },
+                'redo': function () {
+                  this.quill.history.redo()
+                }
+              }
+            }
           },
           placeholder: 'Explain how you understand the concept (max. 300 words)',
           theme: 'snow'
@@ -36,6 +51,30 @@
 <style lang="sass-loader">
   @import '~@/assets/sass/variables';
 
+  // use font awesome icons for undo and redo buttons
+  .ql-undo {
+    &:after {
+      content: "\f112";
+      font-family: FontAwesome;
+      color: #444;
+    }
+    &:hover:after {
+      color: #06c;
+    }
+  }
+
+  .ql-redo {
+    &:after {
+      content: "\f064";
+      font-family: FontAwesome;
+      color: #444;
+    }
+    &:hover:after {
+      color: #06c;
+    }
+  }
+
+  // customize Quill's styles to adhere to Bulma's styles
   .ql-toolbar {
     border-bottom: none !important;
   }
@@ -50,7 +89,7 @@
       border: 1px solid $gray;
       word-break: break-all;
 
-      &::before {
+      &:before {
         font-style: normal;
       }
 
