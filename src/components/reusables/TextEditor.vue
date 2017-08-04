@@ -15,7 +15,7 @@
         content: '',
 
         // options for customizing Quill text editor:
-        // choose which tools to appear in the toolbar
+        // choose which tools to appear in the toolbar,
         // undo and redo tools need to be given a handler
         editorOptions: {
           modules: {
@@ -77,16 +77,18 @@
   // customize Quill's styles to adhere to Bulma's styles
   .ql-toolbar {
     border-bottom: none !important;
+    border-radius: 3px 3px 0 0;
   }
   
   .ql-container {
     border: none !important;
-    height: 250px;
+    height: 15rem;
     font-family: $font;
-    font-size: $font-size-normal;
+    font-size: 1rem;
 
     .ql-editor {
       border: 1px solid $gray;
+      border-radius: 0 0 3px 3px;
       word-break: break-all;
 
       &:before {

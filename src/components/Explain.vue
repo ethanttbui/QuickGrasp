@@ -82,7 +82,7 @@
 </template>
 
 <script>
-  import TextEditor from '@/components/TextEditor'
+  import TextEditor from '@/components/reusables/TextEditor'
 
   export default {
     name: 'Explain',
@@ -91,13 +91,7 @@
 </script>
 
 <style lang="sass-loader" scoped>
-  .container {    
-    .headline {
-      padding: 2rem 0 1.5rem 0;
-    }
-
-    .input {
-      border-radius: 0;
-    } 
+  .headline {
+    padding: 2rem 0 1.5rem 0;
   }
 </style>

@@ -23,4 +23,5 @@ export default {
 }
 </script>
 
-<style lang="sass-loader"></style>
+<!-- import main sass stylesheet -->
+<style src="@/assets/sass/main.scss" lang="sass-loader"></style>

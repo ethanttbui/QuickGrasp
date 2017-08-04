@@ -39,9 +39,9 @@ export default {
   @import '~@/assets/sass/variables';
 
   .field {
-    margin: 0 20% 0 20%;
+    margin: 0 20%;
     @include mobile {
-      margin: 0 5% 0 5%;
+      margin: 0 5%;
     }
 
     .input {
