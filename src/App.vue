@@ -1,26 +1,18 @@
 <template>
   <div>
-
-		<!-- navigation bar -->
-  	<NavBar></NavBar>
-
-		<!-- hero container containing router view -->
-  	<section class="hero is-primary is-bold is-fullheight">
-	    <div class="hero-body">
-    		<router-view></router-view>
-    	</div>
-  	</section>
-    
+  	<navigation-bar></navigation-bar>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-import NavBar from '@/components/NavBar'
+  import NavigationBar from '@/components/NavigationBar'
 
-export default {
-  name: 'app',
-  components: { NavBar }
-}
+  export default {
+    components: {
+      'navigation-bar': NavigationBar
+    }
+  }
 </script>
 
 <!-- import main sass stylesheet -->

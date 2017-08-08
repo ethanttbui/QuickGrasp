@@ -39,8 +39,6 @@
 
 <script>
   export default {
-    name: 'NavBar',
-
     data () {
       return {
         isActive: false

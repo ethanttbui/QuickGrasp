@@ -1,15 +1,11 @@
 <template>
-	<div class="field">
-    <quill-editor v-model="content" :options="editorOptions"></quill-editor>
-  </div>
+  <quill-editor v-model="content" :options="editorOptions" @input="updateContent"></quill-editor>
 </template>
 
 <script>
   import { quillEditor } from 'vue-quill-editor'
 
   export default {
-    name: 'TextEditor',
-
     data () {
       return {
         content: '',
@@ -43,7 +39,13 @@
     },
 
     components: {
-      quillEditor
+      'quill-editor': quillEditor
+    },
+
+    methods: {
+      updateContent () {
+        this.$emit('input', this.content)
+      }
     }
   }
 </script>
@@ -54,7 +56,7 @@
   // use font awesome icons for undo and redo buttons
   .ql-undo {
     &:after {
-      content: "\f112";
+      content: "\f0e2";
       font-family: FontAwesome;
       color: #444;
     }
@@ -65,7 +67,7 @@
 
   .ql-redo {
     &:after {
-      content: "\f064";
+      content: "\f01e";
       font-family: FontAwesome;
       color: #444;
     }

@@ -1,36 +1,39 @@
 <template>
-  <div class="container has-text-centered">
+  <section class="hero is-primary is-bold is-fullheight">
+    <div class="hero-body">
+      <div class="container has-text-centered">
 
-    <!-- page title and subtitle -->
-    <p class="title is-1">
-      QuickGrasp
-    </p>
-    <p class="subtitle is-4">
-      Concepts made Simple
-    </p>
+        <!-- page title and subtitle -->
+        <p class="title is-1">
+          QuickGrasp
+        </p>
+        <p class="subtitle is-4">
+          Concepts made Simple
+        </p>
 
-    <!-- search bar -->
-    <div class="field has-addons">
-      <div class="control is-expanded">
-        <input class="input" type="text" placeholder="Search concepts">
-      </div>
-      <div class="control">
-        <a class="button is-primary is-inverted is-outlined">
-          <span class="icon">
-            <i class="fa fa-search"></i>
-          </span>
-          <span class="is-hidden-mobile">Search</span>
-        </a>
+        <!-- search bar -->
+        <div class="field has-addons">
+          <div class="control is-expanded">
+            <input class="input" type="text" placeholder="Search concepts">
+          </div>
+          <div class="control">
+            <a class="button is-primary is-inverted is-outlined">
+              <span class="icon">
+                <i class="fa fa-search"></i>
+              </span>
+              <span class="is-hidden-mobile">Search</span>
+            </a>
+          </div>
+        </div>
+
       </div>
     </div>
-
-  </div>
+  </section>
 </template>
 
 <script>
-export default {
-  name: 'Home'
-}
+  export default {
+  }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
