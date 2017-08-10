@@ -24,7 +24,7 @@
             <div class="field-body">
               <div class="field">
                 <p class="control has-icons-left">
-                  <input class="input" type="text" placeholder="Concept Name / Title" v-model="concept.name">
+                  <input class="input" type="text" placeholder="Concept Name / Title" v-model="name">
                   <span class="icon is-small is-left">
                     <i class="fa fa-book"></i>
                   </span>
@@ -56,7 +56,7 @@
             </div>
             <div class="field-body">
               <div class="field">
-                <text-editor v-model="concept.explanation"></text-editor>
+                <text-editor v-model="explanation"></text-editor>
               </div>
             </div>
           </div>
@@ -72,7 +72,7 @@
                   </a>
                 </div>
                 <div class="control">
-                  <a class="button is-warning" @click="submitConcept">
+                  <a class="button is-warning" @click="addConcept(name, category, explanation)">
                     Submit
                   </a>
                 </div>
@@ -88,28 +88,14 @@
 
 <script>
   import TextEditor from '@/components/reusables/TextEditor'
-
-  import Firebase from 'firebase'
-  let config = {
-    apiKey: 'AIzaSyDL6XQ0eTNIpRHNhFupKGIGNF0Q6GYoN-8',
-    authDomain: 'quickgrasp-f79b8.firebaseapp.com',
-    databaseURL: 'https://quickgrasp-f79b8.firebaseio.com',
-    projectId: 'quickgrasp-f79b8',
-    storageBucket: 'quickgrasp-f79b8.appspot.com',
-    messagingSenderId: '981275673453'
-  }
-  let app = Firebase.initializeApp(config)
-  let db = app.database()
-  let conceptsRef = db.ref('concepts')
+  import { concepts } from '@/mixins/firebase'
 
   export default {
     data () {
       return {
-        concept: {
-          name: '',
-          category: '',
-          explanation: ''
-        }
+        name: '',
+        category: '',
+        explanation: ''
       }
     },
 
@@ -117,11 +103,7 @@
       'text-editor': TextEditor
     },
 
-    methods: {
-      submitConcept () {
-        conceptsRef.push(this.concept)
-      }
-    }
+    mixins: [concepts]
   }
 </script>
 

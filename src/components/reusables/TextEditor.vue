@@ -1,3 +1,5 @@
+<!-- this component encapsulates everything related to Quill and vue-quill-editor -->
+
 <template>
   <quill-editor v-model="content" :options="editorOptions" @input="updateContent"></quill-editor>
 </template>
@@ -43,6 +45,7 @@
     },
 
     methods: {
+      // update parent component with new value of content
       updateContent () {
         this.$emit('input', this.content)
       }

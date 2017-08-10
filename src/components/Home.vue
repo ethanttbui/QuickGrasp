@@ -36,7 +36,6 @@
   }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="sass-loader" scoped>
   @import '~@/assets/sass/mixins';
   @import '~@/assets/sass/variables';
