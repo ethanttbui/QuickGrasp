@@ -1,6 +1,14 @@
 // this mixin acts as an interface between Vue and Firebase
 // it encapsulates everything related to Firebase and Vuefire
 
+/******************
+
+SUMMARY
+(+) add a new concept to the database: addConcept(name, category, explanation)
+(+) get recommended concepts: reconmmendedConcepts
+
+*******************/
+
 import Firebase from 'firebase'
 
 const config = {
@@ -27,6 +35,12 @@ export const concepts = {
         category: category,
         explanation: explanation
       })
+    }
+  },
+
+  computed: {
+    recommendedConcepts () {
+      return this.concepts
     }
   }
 }
