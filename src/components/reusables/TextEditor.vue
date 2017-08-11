@@ -12,7 +12,7 @@
       return {
         content: '',
 
-        // options for customizing Quill text editor:
+        // options for customizing Quill:
         // choose which tools to appear in the toolbar,
         // undo and redo tools need to be given a handler
         editorOptions: {
@@ -53,6 +53,8 @@
   }
 </script>
 
+<!-- cannot use scoped style here because the elements generated 
+by Quill are not within the scope of this component -->
 <style lang="sass-loader">
   @import '~@/assets/sass/variables';
 
@@ -90,23 +92,23 @@
     height: 15rem;
     font-family: $font;
     font-size: 1rem;
+  }
 
-    .ql-editor {
-      border: 1px solid $gray;
-      border-radius: 0 0 3px 3px;
-      word-break: break-all;
+  .ql-editor {
+    border: 1px solid $gray;
+    border-radius: 0 0 3px 3px;
+    word-break: break-all;
 
-      &:before {
-        font-style: normal;
-      }
+    &:before {
+      font-style: normal !important;
+    }
 
-      &:hover {
-        border: 1px solid $gray-darker;
-      }
+    &:hover {
+      border: 1px solid $gray-darker;
+    }
 
-      &:focus {
-        border: 1px solid $main;
-      }
+    &:focus {
+      border: 1px solid $main;
     }
   }
 </style>

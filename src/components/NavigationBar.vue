@@ -63,22 +63,23 @@
 		background-color: $main-darker;
     border-bottom: 1px solid $main-invert;
     z-index: map-get($zindex, navbar);
+  }
 
-  	.navbar-burger {
-  		span {
-  			background-color: $main-invert;
-  			height: 2px;
-  		}
-  		&:hover {
-  			background-color: transparent;
-  		}
-  	}
+  .navbar-burger {
+    span {
+      background-color: $main-invert;
+      height: 2px;
+    }
+    &:hover {
+      background-color: transparent;
+    }
+  }
 
-    .navbar-item {
+  .navbar-item {
+    color: $main-invert;
+    &:hover {
       color: $main-invert;
-      &:hover {
-        background-color: transparent;
-      }
+      background-color: transparent;
     }
   }
 

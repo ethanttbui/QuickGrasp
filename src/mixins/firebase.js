@@ -1,14 +1,17 @@
-// this mixin acts as an interface between Vue and Firebase
-// it encapsulates everything related to Firebase and Vuefire
-
 /******************
+this mixin acts as an interface between Vue and Firebase
+it encapsulates everything related to Firebase and Vuefire
 
-SUMMARY
+SUMMARY:
+1. addConcept
 (+) add a new concept to the database: addConcept(name, category, explanation)
-(+) get recommended concepts: reconmmendedConcepts
+
+2. getConcepts
+(+) get top concepts: topConcepts
 
 *******************/
 
+// configure Firebase
 import Firebase from 'firebase'
 
 const config = {
@@ -23,7 +26,8 @@ const config = {
 const firebaseApp = Firebase.initializeApp(config)
 const db = firebaseApp.database()
 
-export const concepts = {
+// mixin for adding concepts
+export const addConcept = {
   firebase: {
     concepts: db.ref('concepts')
   },
@@ -36,10 +40,17 @@ export const concepts = {
         explanation: explanation
       })
     }
+  }
+}
+
+// mixin for getting concepts
+export const getConcepts = {
+  firebase: {
+    concepts: db.ref('concepts')
   },
 
   computed: {
-    recommendedConcepts () {
+    topConcepts () {
       return this.concepts
     }
   }

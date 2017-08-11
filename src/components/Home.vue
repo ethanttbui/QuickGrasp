@@ -14,15 +14,15 @@
         <!-- search bar -->
         <div class="field has-addons">
           <div class="control is-expanded">
-            <input class="input" type="text" placeholder="Search concepts">
+            <input class="input" type="text" placeholder="Search concepts" v-model="keyword">
           </div>
           <div class="control">
-            <a class="button is-primary is-inverted is-outlined">
+            <router-link :to="searchResultRoute" class="button is-primary is-inverted is-outlined">
               <span class="icon">
                 <i class="fa fa-search"></i>
               </span>
               <span class="is-hidden-mobile">Search</span>
-            </a>
+            </router-link>
           </div>
         </div>
 
@@ -33,6 +33,18 @@
 
 <script>
   export default {
+    data () {
+      return {
+        keyword: ''
+      }
+    },
+
+    computed: {
+      // compute the route to SearchResult component from the keyword entered
+      searchResultRoute () {
+        return '/search/' + this.keyword.toLowerCase().replace(/ /g, '-')
+      }
+    }
   }
 </script>
 
@@ -45,21 +57,21 @@
     @include mobile {
       margin: 0 5%;
     }
+  }
 
-    .input {
-      border: none;
-      height: 3.5rem;
-      font-size: 1.25rem;
-    }
+  .input {
+    border: none;
+    height: 3.5rem;
+    font-size: 1.25rem;
+  }
 
-    .button {
-      height: 3.5rem;
-      font-size: 1.25rem;
+  .button {
+    height: 3.5rem;
+    font-size: 1.25rem;
 
-      &:hover {
-        background-color: $main-darker !important;
-        color: $main-invert !important;
-      }
+    &:hover {
+      background-color: $main-darker !important;
+      color: $main-invert !important;
     }
   }
 </style>

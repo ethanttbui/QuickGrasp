@@ -4,15 +4,18 @@
       <div class="container">
 
           <!-- recommmended concepts -->
-          <p class="title is-5">Recommended Concepts</p>
+          <p class="title is-5">Top Concepts</p>
           <div class="box">
             <div class="columns is-multiline">
-              <div class="column is-3" v-for="concept in recommendedConcepts"><a href="#" v-text="concept.name"></a></div>
+              <div class="column is-3" v-for="concept in topConcepts"><a href="#" v-text="concept.name"></a></div>
             </div>
           </div>
 
+          <p class="title is-5">Recommended Concepts</p>
+          <div class="box"></div>
+
           <!-- concepts by category -->
-          <p class="title is-5">Browse by Category</p>
+          <p class="title is-5">Concepts by Category</p>
           <div class="box"></div>
 
       </div>
@@ -21,10 +24,11 @@
 </template>
 
 <script>
-  import { concepts } from '@/mixins/firebase'
+  import { getConcepts } from '@/mixins/firebase'
 
   export default {
-    mixins: [concepts]
+    // this mixin handles interactions with the server
+    mixins: [getConcepts]
   }
 </script>
 
