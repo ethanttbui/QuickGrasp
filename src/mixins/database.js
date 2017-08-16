@@ -1,13 +1,18 @@
 /******************
+
 this mixin acts as an interface between Vue and Firebase
 it encapsulates everything related to Firebase and Vuefire
 
 SUMMARY:
-1. addConcept
+1. Explain
 (+) add a new concept to the database: addConcept(name, category, explanation)
 
-2. getConcepts
+2. Browse
 (+) get top concepts: topConcepts
+
+3. Search Result
+(+) trigger searching for a concept by keyword: searchConcepts(keyword)
+(+) access search results: searchResults
 
 *******************/
 
@@ -25,16 +30,15 @@ const config = {
 
 const firebaseApp = Firebase.initializeApp(config)
 const db = firebaseApp.database()
+const concepts = db.ref('concepts')
 
-// mixin for adding concepts
-export const addConcept = {
-  firebase: {
-    concepts: db.ref('concepts')
-  },
+// mixin for Explain component
+export const explain = {
 
   methods: {
     addConcept (name, category, explanation) {
-      this.$firebaseRefs.concepts.push({
+      concepts.push({
+        keyword: name.toLowerCase(),
         name: name,
         category: category,
         explanation: explanation
@@ -43,15 +47,24 @@ export const addConcept = {
   }
 }
 
-// mixin for getting concepts
-export const getConcepts = {
+// mixin for Browse component
+export const browse = {
   firebase: {
-    concepts: db.ref('concepts')
-  },
+    topConcepts: db.ref('concepts')
+  }
+}
 
-  computed: {
-    topConcepts () {
-      return this.concepts
+// mixin for SearchResult component
+export const search = {
+  methods: {
+    searchConcept (keyword) {
+      this.$bindAsArray(
+        'searchResults',
+        concepts.orderByChild('keyword')
+          .startAt(keyword)
+          .endAt(keyword + 'uf8ff')
+      )
+      return this.searchResults
     }
   }
 }

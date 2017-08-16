@@ -30,7 +30,8 @@ export default new Router({
     {
       path: '/search/:keyword',
       name: 'search',
-      component: SearchResult
+      component: SearchResult,
+      props: true
     }
   ]
 })

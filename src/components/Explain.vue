@@ -88,7 +88,7 @@
 
 <script>
   import TextEditor from '@/components/reusables/TextEditor'
-  import { addConcept } from '@/mixins/firebase'
+  import { explain } from '@/mixins/database'
 
   export default {
     data () {
@@ -104,7 +104,7 @@
     },
 
     // this mixin handles interactions with the server
-    mixins: [addConcept]
+    mixins: [explain]
   }
 </script>
 

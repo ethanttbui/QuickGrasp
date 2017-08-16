@@ -24,11 +24,11 @@
 </template>
 
 <script>
-  import { getConcepts } from '@/mixins/firebase'
+  import { browse } from '@/mixins/database'
 
   export default {
     // this mixin handles interactions with the server
-    mixins: [getConcepts]
+    mixins: [browse]
   }
 </script>
 

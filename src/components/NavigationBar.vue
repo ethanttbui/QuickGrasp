@@ -2,12 +2,12 @@
 	<nav class="navbar is-transparent has-shadow">
 
 		<!-- brand section with logo and burger icon -->
-	  <div class="navbar-brand" :class="{ 'has-border':isActive }">
+	  <div class="navbar-brand" :class="{ 'has-border': isActive }">
 	    <router-link to="/" class="navbar-item">
 	      QuickGrasp
 	    </router-link>
 
-	    <div class="navbar-burger" :class="{ 'is-active':isActive }" @click="toggleNavMenu">
+	    <div class="navbar-burger" :class="{ 'is-active': isActive }" @click="toggleNavMenu">
 	      <span></span>
 	      <span></span>
 	      <span></span>
@@ -15,7 +15,7 @@
 	  </div>
 
 		<!-- main navigation menu -->
-	  <div class="navbar-menu" :class="{ 'is-active':isActive }">
+	  <div class="navbar-menu" :class="{ 'is-active': isActive }">
 	    <div class="navbar-end">
 	    	<router-link to="/browse" class="navbar-item">
 	    		Browse Concepts
