@@ -27,7 +27,7 @@
   import { browse } from '@/mixins/database'
 
   export default {
-    // this mixin handles interactions with the server
+    // this mixin handles retrieving data from the server
     mixins: [browse]
   }
 </script>

@@ -1,23 +1,24 @@
 /******************
 
 this mixin acts as an interface between Vue and Firebase
-it encapsulates everything related to Firebase and Vuefire
+it encapsulates everything related to Firebase, Vuefire and also Elasticlunr
 
 SUMMARY:
 1. Explain
 (+) add a new concept to the database: addConcept(name, category, explanation)
 
 2. Browse
-(+) get top concepts: topConcepts
+(+) retrieve top concepts: topConcepts
 
-3. Search Result
-(+) trigger searching for a concept by keyword: searchConcepts(keyword)
-(+) access search results: searchResults
+3. SearchResult
+(+) first, set the search string when the component is created: setSearchString(searchString)
+(+) then retrieve search results: searchResults
 
 *******************/
 
 // configure Firebase
 import Firebase from 'firebase'
+import Elasticlunr from 'elasticlunr'
 
 const config = {
   apiKey: 'AIzaSyDL6XQ0eTNIpRHNhFupKGIGNF0Q6GYoN-8',
@@ -30,15 +31,13 @@ const config = {
 
 const firebaseApp = Firebase.initializeApp(config)
 const db = firebaseApp.database()
-const concepts = db.ref('concepts')
+const conceptsRef = db.ref('concepts')
 
 // mixin for Explain component
 export const explain = {
-
   methods: {
     addConcept (name, category, explanation) {
-      concepts.push({
-        keyword: name.toLowerCase(),
+      conceptsRef.push({
         name: name,
         category: category,
         explanation: explanation
@@ -50,21 +49,68 @@ export const explain = {
 // mixin for Browse component
 export const browse = {
   firebase: {
-    topConcepts: db.ref('concepts')
+    topConcepts: conceptsRef
   }
 }
 
 // mixin for SearchResult component
 export const search = {
+  data () {
+    return {
+      searchString: '',
+      searchResults: []
+    }
+  },
+
+  firebase: {
+    concepts: {
+      source: conceptsRef,
+      asObject: true,
+      readyCallback: function () {
+        this.searchConcepts(this.searchString)
+      }
+    }
+  },
+
   methods: {
-    searchConcept (keyword) {
-      this.$bindAsArray(
-        'searchResults',
-        concepts.orderByChild('keyword')
-          .startAt(keyword)
-          .endAt(keyword + 'uf8ff')
-      )
-      return this.searchResults
+    setSearchString (searchString) {
+      this.searchString = searchString
+    },
+
+    searchConcepts (searchString) {
+      // initialize index object
+      let index = Elasticlunr(function () {
+        this.addField('name')
+        this.addField('explanation')
+        this.setRef('key')
+      })
+
+      // indexing documents, use firebase auto-generated key as the document ref
+      for (let key in this.concepts) {
+        let doc = {
+          'name': this.concepts[key].name,
+          'explanation': this.concepts[key].explanation,
+          'key': key
+        }
+        index.addDoc(doc)
+      }
+
+      // search for matching documents
+      // prefer searching by name over searching by explanation
+      let matchingDocs = index.search(searchString, {
+        fields: {
+          name: {boost: 2},
+          explanation: {boost: 1}
+        }
+      })
+
+      // retrieve the final search results based on the matching document refs
+      let searchResults = []
+      for (let doc of matchingDocs) {
+        searchResults.push(this.concepts[doc.ref])
+      }
+
+      this.searchResults = searchResults
     }
   }
 }

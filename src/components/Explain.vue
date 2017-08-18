@@ -103,7 +103,7 @@
       'text-editor': TextEditor
     },
 
-    // this mixin handles interactions with the server
+    // this mixin handles sending data to the server
     mixins: [explain]
   }
 </script>

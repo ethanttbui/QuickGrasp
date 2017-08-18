@@ -3,7 +3,8 @@
     <div class="hero-body">
       <div class="container">
         <div class="box" v-for="result in searchResults">
-          <p v-text="result.name"></p>
+          <a v-text="result.name"></a>
+          <div v-html="result.explanation"></div>
         </div>
       </div>
     </div>
@@ -14,19 +15,24 @@
   import { search } from '@/mixins/database'
 
   export default {
-    props: ['keyword'],
+    props: ['searchKey'],
 
+    // this mixin handles retrieving and filtering data from the server
     mixins: [search],
 
     created () {
-      let subKeys = this.keyword.split('-')
-      for (let subKey of subKeys) {
-        if (this.searchConcept(subKey).length !== 0) {
-          break
-        }
-      }
+      // normalize and set search string
+      let searchString = this.searchKey.replace(/-/g, ' ')
+      this.setSearchString(searchString)
     }
   }
 </script>
 
-<style lang="sass-loader" scoped></style>
+<style lang="sass-loader" scoped>
+  a {
+    font-weight: bold;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+</style>
