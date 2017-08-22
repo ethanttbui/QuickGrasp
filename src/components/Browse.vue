@@ -27,6 +27,8 @@
   import { browse } from '@/mixins/database'
 
   export default {
+    // data: topConcepts
+
     // this mixin handles retrieving data from the server
     mixins: [browse]
   }

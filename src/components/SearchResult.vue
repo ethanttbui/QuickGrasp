@@ -15,6 +15,9 @@
   import { search } from '@/mixins/database'
 
   export default {
+    // data: searchResults
+    // methods: setSearchString()
+
     props: ['searchKey'],
 
     // this mixin handles retrieving and filtering data from the server

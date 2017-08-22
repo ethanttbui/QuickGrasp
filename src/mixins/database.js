@@ -6,13 +6,14 @@ it encapsulates everything related to Firebase, Vuefire and also Elasticlunr
 SUMMARY:
 1. Explain
 (+) add a new concept to the database: addConcept(name, category, explanation)
+(+) retrieve the error message from server: serverErrorMessage
 
 2. Browse
 (+) retrieve top concepts: topConcepts
 
 3. SearchResult
 (+) first, set the search string when the component is created: setSearchString(searchString)
-(+) then retrieve search results: searchResults
+(+) then retrieve the search results: searchResults
 
 *******************/
 
@@ -35,12 +36,21 @@ const conceptsRef = db.ref('concepts')
 
 // mixin for Explain component
 export const explain = {
+  data () {
+    return {
+      serverErrorMessage: ''
+    }
+  },
+
   methods: {
     addConcept (name, category, explanation) {
+      let self = this
       conceptsRef.push({
         name: name,
         category: category,
         explanation: explanation
+      }, function (error) {
+        self.serverErrorMessage = error !== null ? error.code : ''
       })
     }
   }
@@ -67,7 +77,7 @@ export const search = {
       source: conceptsRef,
       asObject: true,
       readyCallback: function () {
-        this.searchConcepts(this.searchString)
+        this.searchConcept(this.searchString)
       }
     }
   },
@@ -77,7 +87,7 @@ export const search = {
       this.searchString = searchString
     },
 
-    searchConcepts (searchString) {
+    searchConcept (searchString) {
       // initialize index object
       let index = Elasticlunr(function () {
         this.addField('name')
@@ -95,7 +105,7 @@ export const search = {
         index.addDoc(doc)
       }
 
-      // search for matching documents
+      // search for the documents that match
       // prefer searching by name over searching by explanation
       let matchingDocs = index.search(searchString, {
         fields: {
@@ -104,7 +114,7 @@ export const search = {
         }
       })
 
-      // retrieve the final search results based on the matching document refs
+      // retrieve the final search results using the matching documents' refs
       let searchResults = []
       for (let doc of matchingDocs) {
         searchResults.push(this.concepts[doc.ref])

@@ -16,6 +16,8 @@
         <!-- a box that contains the entire form -->
         <div class="box">
 
+          <p class="help is-danger has-text-centered" v-text="serverErrorMessage"></p>
+
           <!-- concept title input field -->
           <div class="field is-horizontal">
             <div class="field-label is-normal">
@@ -23,12 +25,7 @@
             </div>
             <div class="field-body">
               <div class="field">
-                <p class="control has-icons-left">
-                  <input class="input" type="text" placeholder="Concept Name / Title" v-model="name">
-                  <span class="icon is-small is-left">
-                    <i class="fa fa-book"></i>
-                  </span>
-                </p>
+                <input-field name="name" rules="required" placeholder="Concept Name / Title" v-model="name"></input-field>
               </div>
             </div>
           </div>
@@ -56,7 +53,7 @@
             </div>
             <div class="field-body">
               <div class="field">
-                <text-editor v-model="explanation"></text-editor>
+                <text-editor name="explanation" rules="required" v-model="explanation"></text-editor>
               </div>
             </div>
           </div>
@@ -72,7 +69,7 @@
                   </a>
                 </div>
                 <div class="control">
-                  <a class="button is-warning" @click="addConcept(name, category, explanation)">
+                  <a class="button is-warning">
                     Submit
                   </a>
                 </div>
@@ -87,10 +84,14 @@
 </template>
 
 <script>
+  import InputField from '@/components/reusables/InputField'
   import TextEditor from '@/components/reusables/TextEditor'
   import { explain } from '@/mixins/database'
 
   export default {
+    // data: serverErrorMessgae
+    // methods: addConcept()
+
     data () {
       return {
         name: '',
@@ -100,11 +101,14 @@
     },
 
     components: {
-      'text-editor': TextEditor
+      'text-editor': TextEditor,
+      'input-field': InputField
     },
 
     // this mixin handles sending data to the server
-    mixins: [explain]
+    mixins: [explain],
+
+    methods: {}
   }
 </script>
 

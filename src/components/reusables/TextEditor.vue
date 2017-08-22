@@ -1,13 +1,16 @@
-<!-- this component encapsulates everything related to Quill and vue-quill-editor -->
-
 <template>
-  <quill-editor v-model="content" :options="editorOptions" @input="updateContent"></quill-editor>
+  <div>
+    <quill-editor v-validate="rules" data-vv-value-path="content" :name="name" v-model="content" :options="editorOptions" @input="updateContent"></quill-editor>
+    <p class="help is-danger" v-if="errors.has(name)" v-text="errors.first(name)"></p>
+  </div>
 </template>
 
 <script>
   import { quillEditor } from 'vue-quill-editor'
 
   export default {
+    props: ['name', 'rules'],
+
     data () {
       return {
         content: '',
