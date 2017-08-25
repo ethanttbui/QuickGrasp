@@ -16,7 +16,7 @@
         <!-- a box that contains the entire form -->
         <div class="box">
 
-          <p class="help is-danger has-text-centered" v-text="http.getErrorMessage()"></p>
+          <p class="help is-danger has-text-centered" v-text=""></p>
 
           <!-- concept name input field -->
           <div class="field is-horizontal">
@@ -82,7 +82,7 @@
 <script>
   import InputField from '@/components/reusables/InputField'
   import TextEditor from '@/components/reusables/TextEditor'
-  import { ExplainHttp } from '@/js/database'
+  import { ExplainHttp } from '@/js/http'
 
   export default {
     // enable vee-validator plugin
@@ -109,6 +109,12 @@
         this.$validator.validateAll().then(function (result) {
           if (result) {
             self.http.addConcept(self.name, self.category, self.explanation)
+              .then(function (data) {
+                console.log(data)
+              })
+              .catch(function (error) {
+                console.log(error)
+              })
           }
         })
       }

@@ -3,10 +3,8 @@
 import Vue from 'vue'
 import App from '@/App'
 import router from '@/router'
-import VueFire from 'vuefire'
 import VeeValidate from 'vee-validate'
 
-Vue.use(VueFire)
 Vue.use(VeeValidate, {
   events: '',
   inject: false

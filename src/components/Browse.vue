@@ -24,7 +24,7 @@
 </template>
 
 <script>
-  import { BrowseHttp } from '@/js/database'
+  import { BrowseHttp } from '@/js/http'
 
   export default {
     data () {
@@ -41,7 +41,7 @@
           self.topConcepts = data
         })
         .catch(function (error) {
-          alert(error)
+          console.log(error)
         })
     }
   }

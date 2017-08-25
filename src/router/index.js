@@ -12,25 +12,21 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'home',
       component: Home
     },
 
     {
       path: '/explain',
-      name: 'explain',
       component: Explain
     },
 
     {
       path: '/browse',
-      name: 'browse',
       component: Browse
     },
 
     {
       path: '/search/:searchKey',
-      name: 'search',
       component: Search,
       props: true
     }

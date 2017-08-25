@@ -1,23 +1,3 @@
-/******************
-
-this mixin acts as an interface between Vue and Firebase
-it encapsulates everything related to Firebase, Vuefire and also Elasticlunr
-
-SUMMARY:
-1. Explain
-(+) add a new concept to the database: addConcept(name, category, explanation)
-(+) retrieve the error message from server: serverErrorMessage
-
-2. Browse
-(+) retrieve top concepts: topConcepts
-
-3. SearchResult
-(+) first, set the search string when the component is created: setSearchString(searchString)
-(+) then retrieve the search results: searchResults
-
-*******************/
-
-// configure Firebase
 import Firebase from 'firebase'
 import Elasticlunr from 'elasticlunr'
 
@@ -36,22 +16,11 @@ const conceptsRef = db.ref('concepts')
 
 // http class for Explain component
 export class ExplainHttp {
-  constructor () {
-    this._errorMessage = ''
-  }
-
-  getErrorMessage () {
-    return this._errorMessage
-  }
-
   addConcept (name, category, explanation) {
-    let self = this
-    conceptsRef.push({
+    return conceptsRef.push({
       name: name,
       category: category,
       explanation: explanation
-    }, function (error) {
-      self._errorMessage = error !== null ? error.code : ''
     })
   }
 }
@@ -60,7 +29,7 @@ export class ExplainHttp {
 export class BrowseHttp {
   getTopConcepts () {
     return new Promise(function (resolve, reject) {
-      conceptsRef.on('value', function (snapshot) {
+      conceptsRef.once('value', function (snapshot) {
         resolve(snapshot.val())
       }, function (error) {
         reject(error)
@@ -79,7 +48,8 @@ export class SearchHttp {
       this.setRef('key')
     })
 
-    // indexing documents, use firebase auto-generated key as the document ref
+    // indexing concepts in documents
+    // use firebase auto-generated key as the document ref
     for (let key in data) {
       let doc = {
         'name': data[key].name,
@@ -110,7 +80,7 @@ export class SearchHttp {
   getSearchResults (searchString) {
     let self = this
     return new Promise(function (resolve, reject) {
-      conceptsRef.on('value', function (snapshot) {
+      conceptsRef.once('value', function (snapshot) {
         let searchResults = self._elasticLunr(snapshot.val(), searchString)
         resolve(searchResults)
       }, function (error) {

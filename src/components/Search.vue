@@ -12,7 +12,7 @@
 </template>
 
 <script>
-  import { SearchHttp } from '@/js/database'
+  import { SearchHttp } from '@/js/http'
 
   export default {
     props: ['searchKey'],
