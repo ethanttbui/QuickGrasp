@@ -4,7 +4,7 @@ import Router from 'vue-router'
 import Home from '@/components/Home'
 import Browse from '@/components/Browse'
 import Explain from '@/components/Explain'
-import SearchResult from '@/components/SearchResult'
+import Search from '@/components/Search'
 
 Vue.use(Router)
 
@@ -31,7 +31,7 @@ export default new Router({
     {
       path: '/search/:searchKey',
       name: 'search',
-      component: SearchResult,
+      component: Search,
       props: true
     }
   ]

@@ -16,17 +16,15 @@
         <!-- a box that contains the entire form -->
         <div class="box">
 
-          <p class="help is-danger has-text-centered" v-text="serverErrorMessage"></p>
+          <p class="help is-danger has-text-centered" v-text="http.getErrorMessage()"></p>
 
-          <!-- concept title input field -->
+          <!-- concept name input field -->
           <div class="field is-horizontal">
             <div class="field-label is-normal">
               <label class="label">Concept</label>
             </div>
             <div class="field-body">
-              <div class="field">
-                <input-field name="name" rules="required" placeholder="Concept Name / Title" v-model="name"></input-field>
-              </div>
+              <input-field name="concept name" rules="required" placeholder="Concept Name / Title" v-model="name"></input-field>
             </div>
           </div>
 
@@ -46,15 +44,13 @@
             </div>
           </div>
 
-          <!-- TextEditor component -->
+          <!-- explanation input field -->
           <div class="field is-horizontal">
             <div class="field-label is-normal">
               <label class="label">Explanation</label>
             </div>
             <div class="field-body">
-              <div class="field">
-                <text-editor name="explanation" rules="required" v-model="explanation"></text-editor>
-              </div>
+              <text-editor name="explanation" rules="required" v-model="explanation"></text-editor>
             </div>
           </div>
 
@@ -69,7 +65,7 @@
                   </a>
                 </div>
                 <div class="control">
-                  <a class="button is-warning">
+                  <a class="button is-warning" @click="validateAndSubmit">
                     Submit
                   </a>
                 </div>
@@ -86,29 +82,37 @@
 <script>
   import InputField from '@/components/reusables/InputField'
   import TextEditor from '@/components/reusables/TextEditor'
-  import { explain } from '@/mixins/database'
+  import { ExplainHttp } from '@/js/database'
 
   export default {
-    // data: serverErrorMessgae
-    // methods: addConcept()
-
-    data () {
-      return {
-        name: '',
-        category: '',
-        explanation: ''
-      }
-    },
+    // enable vee-validator plugin
+    $validates: true,
 
     components: {
       'text-editor': TextEditor,
       'input-field': InputField
     },
 
-    // this mixin handles sending data to the server
-    mixins: [explain],
+    data () {
+      return {
+        http: new ExplainHttp(),
+        name: '',
+        category: '',
+        explanation: ''
+      }
+    },
 
-    methods: {}
+    methods: {
+      // validate the form and submit if no error is encountered
+      validateAndSubmit () {
+        let self = this
+        this.$validator.validateAll().then(function (result) {
+          if (result) {
+            self.http.addConcept(self.name, self.category, self.explanation)
+          }
+        })
+      }
+    }
   }
 </script>
 

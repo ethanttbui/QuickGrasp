@@ -1,6 +1,7 @@
 <template>
-  <div>
-    <quill-editor v-validate="rules" data-vv-value-path="content" :name="name" v-model="content" :options="editorOptions" @input="updateContent"></quill-editor>
+  <div class="field">
+    <label class="label" v-if="label" v-text="label"></label>
+    <quill-editor :name="name" v-validate="rules" v-model="content" :options="editorOptions" @input="removeErrors() + updateContent()"></quill-editor>
     <p class="help is-danger" v-if="errors.has(name)" v-text="errors.first(name)"></p>
   </div>
 </template>
@@ -9,7 +10,15 @@
   import { quillEditor } from 'vue-quill-editor'
 
   export default {
-    props: ['name', 'rules'],
+    props: ['label', 'name', 'rules'],
+
+    // inject $validator object from parent component,
+    // allowing parent component to control validation inside this component
+    inject: ['$validator'],
+
+    components: {
+      'quill-editor': quillEditor
+    },
 
     data () {
       return {
@@ -43,11 +52,12 @@
       }
     },
 
-    components: {
-      'quill-editor': quillEditor
-    },
-
     methods: {
+      // remove errors associated with this field
+      removeErrors () {
+        this.errors.remove(this.name)
+      },
+
       // update parent component with new value of content
       updateContent () {
         this.$emit('input', this.content)

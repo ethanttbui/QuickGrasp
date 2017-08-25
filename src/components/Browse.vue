@@ -24,13 +24,26 @@
 </template>
 
 <script>
-  import { browse } from '@/mixins/database'
+  import { BrowseHttp } from '@/js/database'
 
   export default {
-    // data: topConcepts
+    data () {
+      return {
+        http: new BrowseHttp(),
+        topConcepts: []
+      }
+    },
 
-    // this mixin handles retrieving data from the server
-    mixins: [browse]
+    created () {
+      let self = this
+      this.http.getTopConcepts()
+        .then(function (data) {
+          self.topConcepts = data
+        })
+        .catch(function (error) {
+          alert(error)
+        })
+    }
   }
 </script>
 

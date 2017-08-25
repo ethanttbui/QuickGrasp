@@ -14,10 +14,10 @@
         <!-- search bar -->
         <div class="field has-addons">
           <div class="control is-expanded">
-            <input class="input" type="text" placeholder="Search concepts" v-model="searchString" @keyup.enter="toSearchResult">
+            <input class="input" type="text" placeholder="Search concepts" v-model="searchString" @keyup.enter="goToSearch">
           </div>
           <div class="control">
-            <a class="button is-primary is-inverted is-outlined" @click="toSearchResult">
+            <a class="button is-primary is-inverted is-outlined" @click="goToSearch">
               <span class="icon">
                 <i class="fa fa-search"></i>
               </span>
@@ -40,8 +40,8 @@
     },
 
     methods: {
-      // navigate to SearchResult component if searchString is not empty
-      toSearchResult () {
+      // navigate to Search component if searchString is not empty
+      goToSearch () {
         if (this.searchString) {
           let route = '/search/' + this.searchString.toLowerCase().replace(/ /g, '-')
           this.$router.push(route)

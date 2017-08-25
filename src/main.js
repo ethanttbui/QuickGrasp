@@ -7,7 +7,10 @@ import VueFire from 'vuefire'
 import VeeValidate from 'vee-validate'
 
 Vue.use(VueFire)
-Vue.use(VeeValidate)
+Vue.use(VeeValidate, {
+  events: '',
+  inject: false
+})
 
 Vue.config.productionTip = false
 
