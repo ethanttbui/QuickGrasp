@@ -2,7 +2,7 @@
   <div class="field">
     <label class="label" v-if="label" v-text="label"></label>
     <div class="control has-icons-left">
-      <input class="input" type="text" :placeholder="placeholder" :name="name" v-validate="rules" v-model="content" :class="{'is-danger': errors.has(name)}" @input="removeErrors() + updateContent()">
+      <input class="input" type="text" :placeholder="placeholder" v-model="content" :class="{'is-danger': errors.has(name)}" @input="onInput()">
       <span class="icon is-small is-left">
         <i class="fa fa-book"></i>
       </span>
@@ -13,11 +13,7 @@
 
 <script>
   export default {
-    props: ['label', 'name', 'rules', 'placeholder'],
-
-    // inject $validator object from parent component,
-    // allowing parent component to control validation inside this component
-    inject: ['$validator'],
+    props: ['label', 'placeholder', 'name', 'errors'],
 
     data () {
       return {
@@ -27,12 +23,9 @@
 
     methods: {
       // remove errors associated with this field
-      removeErrors () {
-        this.errors.remove(this.name)
-      },
-
       // update parent component with new value of content
-      updateContent (field) {
+      onInput () {
+        this.errors.remove(this.name)
         this.$emit('input', this.content)
       }
     }

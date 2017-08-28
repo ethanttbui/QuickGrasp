@@ -16,15 +16,15 @@
         <!-- a box that contains the entire form -->
         <div class="box">
 
-          <p class="help is-danger has-text-centered" v-text=""></p>
+          <!-- <p class="help is-danger has-text-centered" v-text=""></p> -->
 
           <!-- concept name input field -->
           <div class="field is-horizontal">
             <div class="field-label is-normal">
-              <label class="label">Concept</label>
+              <label class="label">Concept Name</label>
             </div>
             <div class="field-body">
-              <input-field name="concept name" rules="required" placeholder="Concept Name / Title" v-model="name"></input-field>
+              <input-field :name="'concept name'" :errors="validationErrors" v-validate="'required'" data-vv-value-path="name" placeholder="Concept Name / Title" v-model="conceptName"></input-field>
             </div>
           </div>
 
@@ -50,7 +50,7 @@
               <label class="label">Explanation</label>
             </div>
             <div class="field-body">
-              <text-editor name="explanation" rules="required" v-model="explanation"></text-editor>
+              <text-editor :name="'explanation'" :errors="validationErrors" v-validate="'required'" data-vv-value-path="explanation" v-model="explanation"></text-editor>
             </div>
           </div>
 
@@ -85,7 +85,7 @@
   import { ExplainHttp } from '@/js/http'
 
   export default {
-    // enable vee-validator plugin
+    // enable vee-validator plugin, which provides the $validator instance variable
     $validates: true,
 
     components: {
@@ -96,7 +96,8 @@
     data () {
       return {
         http: new ExplainHttp(),
-        name: '',
+        validationErrors: this.$validator.errors,
+        conceptName: '',
         category: '',
         explanation: ''
       }
@@ -108,7 +109,7 @@
         let self = this
         this.$validator.validateAll().then(function (result) {
           if (result) {
-            self.http.addConcept(self.name, self.category, self.explanation)
+            self.http.addConcept(self.conceptName, self.category, self.explanation)
               .then(function (data) {
                 console.log(data)
               })

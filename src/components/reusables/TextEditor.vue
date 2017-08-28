@@ -1,7 +1,7 @@
 <template>
   <div class="field">
     <label class="label" v-if="label" v-text="label"></label>
-    <quill-editor :name="name" v-validate="rules" v-model="content" :options="editorOptions" @input="removeErrors() + updateContent()"></quill-editor>
+    <quill-editor  v-model="content" :options="editorOptions" @input="onInput()" :class="{'is-danger': errors.has(name)}"></quill-editor>
     <p class="help is-danger" v-if="errors.has(name)" v-text="errors.first(name)"></p>
   </div>
 </template>
@@ -10,11 +10,7 @@
   import { quillEditor } from 'vue-quill-editor'
 
   export default {
-    props: ['label', 'name', 'rules'],
-
-    // inject $validator object from parent component,
-    // allowing parent component to control validation inside this component
-    inject: ['$validator'],
+    props: ['label', 'name', 'errors'],
 
     components: {
       'quill-editor': quillEditor
@@ -54,12 +50,9 @@
 
     methods: {
       // remove errors associated with this field
-      removeErrors () {
-        this.errors.remove(this.name)
-      },
-
       // update parent component with new value of content
-      updateContent () {
+      onInput () {
+        this.errors.remove(this.name)
         this.$emit('input', this.content)
       }
     }
@@ -70,6 +63,7 @@
 by Quill are not within the scope of this component -->
 <style lang="sass-loader">
   @import '~@/assets/sass/variables';
+  @import '~bulma/sass/utilities/initial-variables';
 
   // use font awesome icons for undo and redo buttons
   .ql-undo {
@@ -103,12 +97,12 @@ by Quill are not within the scope of this component -->
   .ql-container {
     border: none !important;
     height: 15rem;
-    font-family: $font;
+    font-family: $family-sans-serif;
     font-size: 1rem;
   }
 
   .ql-editor {
-    border: 1px solid $gray;
+    border: 1px solid $grey-lighter;
     border-radius: 0 0 3px 3px;
     word-break: break-all;
 
@@ -117,11 +111,15 @@ by Quill are not within the scope of this component -->
     }
 
     &:hover {
-      border: 1px solid $gray-darker;
+      border: 1px solid $grey-light;
     }
 
     &:focus {
       border: 1px solid $main;
     }
+  }
+
+  .is-danger .ql-editor {
+    border: 1px solid $red;
   }
 </style>
