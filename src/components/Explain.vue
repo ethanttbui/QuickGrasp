@@ -16,15 +16,13 @@
         <!-- a box that contains the entire form -->
         <div class="box">
 
-          <!-- <p class="help is-danger has-text-centered" v-text=""></p> -->
-
           <!-- concept name input field -->
           <div class="field is-horizontal">
             <div class="field-label is-normal">
               <label class="label">Concept Name</label>
             </div>
             <div class="field-body">
-              <input-field :name="'concept name'" :errors="validationErrors" v-validate="'required'" data-vv-value-path="name" placeholder="Concept Name / Title" v-model="conceptName"></input-field>
+              <input-field placeholder="Concept Name / Title" :error="validator.getError('concept name')" @input="validator.clearError('concept name')" v-model="conceptName"></input-field>
             </div>
           </div>
 
@@ -50,7 +48,7 @@
               <label class="label">Explanation</label>
             </div>
             <div class="field-body">
-              <text-editor :name="'explanation'" :errors="validationErrors" v-validate="'required'" data-vv-value-path="explanation" v-model="explanation"></text-editor>
+              <text-editor :error="validator.getError('explanation')" @input="validator.clearError('explanation')" v-model="explanation"></text-editor>
             </div>
           </div>
 
@@ -83,10 +81,9 @@
   import InputField from '@/components/reusables/InputField'
   import TextEditor from '@/components/reusables/TextEditor'
   import { ExplainHttp } from '@/js/http'
+  import Validator from '@/js/validate'
 
   export default {
-    // enable vee-validator plugin, which provides the $validator instance variable
-    $validates: true,
 
     components: {
       'text-editor': TextEditor,
@@ -96,7 +93,7 @@
     data () {
       return {
         http: new ExplainHttp(),
-        validationErrors: this.$validator.errors,
+        validator: new Validator(['concept name', 'explanation']),
         conceptName: '',
         category: '',
         explanation: ''
@@ -106,18 +103,17 @@
     methods: {
       // validate the form and submit if no error is encountered
       validateAndSubmit () {
-        let self = this
-        this.$validator.validateAll().then(function (result) {
-          if (result) {
-            self.http.addConcept(self.conceptName, self.category, self.explanation)
-              .then(function (data) {
-                console.log(data)
-              })
-              .catch(function (error) {
-                console.log(error)
-              })
-          }
-        })
+        this.validator.validate(['required'], 'concept name', this.conceptName)
+        this.validator.validate(['required'], 'explanation', this.explanation)
+        if (!this.validator.hasError()) {
+          this.http.addConcept(this.conceptName, this.category, this.explanation)
+            .then(function (data) {
+              console.log(data)
+            })
+            .catch(function (error) {
+              console.log(error)
+            })
+        }
       }
     }
   }

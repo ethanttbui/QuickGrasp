@@ -1,8 +1,8 @@
 <template>
   <div class="field">
     <label class="label" v-if="label" v-text="label"></label>
-    <quill-editor  v-model="content" :options="editorOptions" @input="onInput()" :class="{'is-danger': errors.has(name)}"></quill-editor>
-    <p class="help is-danger" v-if="errors.has(name)" v-text="errors.first(name)"></p>
+    <quill-editor  v-model="content" :options="editorOptions" @input="updateContent()" :class="{'is-danger': error}"></quill-editor>
+    <p class="help is-danger" v-if="error" v-text="error"></p>
   </div>
 </template>
 
@@ -10,7 +10,7 @@
   import { quillEditor } from 'vue-quill-editor'
 
   export default {
-    props: ['label', 'name', 'errors'],
+    props: ['label', 'error'],
 
     components: {
       'quill-editor': quillEditor
@@ -49,10 +49,8 @@
     },
 
     methods: {
-      // remove errors associated with this field
       // update parent component with new value of content
-      onInput () {
-        this.errors.remove(this.name)
+      updateContent () {
         this.$emit('input', this.content)
       }
     }
