@@ -20,7 +20,9 @@ export class ExplainHttp {
     return conceptsRef.push({
       name: name,
       category: category,
-      explanation: explanation
+      bestExplanation: explanation,
+      viewCount: 1,
+      timestamp: Firebase.database.ServerValue.TIMESTAMP
     })
   }
 }

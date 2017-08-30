@@ -1,16 +1,16 @@
 export default class Validator {
   constructor (fields) {
     this._fields = fields
-    this._errorMessages = {}
+    this._errors = {}
     for (let field of fields) {
-      this._errorMessages[field] = ''
+      this._errors[field] = ''
     }
   }
 
   hasError () {
     let hasError = false
     for (let field of this._fields) {
-      if (this._errorMessages[field] !== '') {
+      if (this._errors[field] !== '') {
         hasError = true
       }
     }
@@ -18,11 +18,11 @@ export default class Validator {
   }
 
   getError (field) {
-    return this._errorMessages[field]
+    return this._errors[field]
   }
 
   clearError (field) {
-    this._errorMessages[field] = ''
+    this._errors[field] = ''
   }
 
   validate (rules, field, value) {
@@ -30,12 +30,12 @@ export default class Validator {
       switch (rule) {
         case 'required':
           if (!this._checkEmpty(value)) {
-            this._errorMessages[field] = 'The ' + field + ' field is required.'
+            this._errors[field] = 'The ' + field + ' field is required.'
           }
           break
 
         default:
-          console.log('No handler for this rule.')
+          console.log('No handler for this rule')
       }
     }
   }

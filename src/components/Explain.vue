@@ -107,8 +107,8 @@
         this.validator.validate(['required'], 'explanation', this.explanation)
         if (!this.validator.hasError()) {
           this.http.addConcept(this.conceptName, this.category, this.explanation)
-            .then(function (data) {
-              console.log(data)
+            .then(function () {
+              console.log('Concept added successfully')
             })
             .catch(function (error) {
               console.log(error)

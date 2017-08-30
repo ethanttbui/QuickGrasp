@@ -2,7 +2,7 @@
   <div class="field">
     <label class="label" v-if="label" v-text="label"></label>
     <div class="control has-icons-left">
-      <input class="input" type="text" :placeholder="placeholder" v-model="content" :class="{'is-danger': error}" @input="updateContent()">
+      <input class="input" type="text" :placeholder="placeholder" :value="value" :class="{'is-danger': error}" @input="updateValue($event.target.value)">
       <span class="icon is-small is-left">
         <i class="fa fa-book"></i>
       </span>
@@ -13,18 +13,12 @@
 
 <script>
   export default {
-    props: ['label', 'placeholder', 'error'],
-
-    data () {
-      return {
-        content: ''
-      }
-    },
+    props: ['value', 'label', 'placeholder', 'error'],
 
     methods: {
-      // update parent component with new value of content
-      updateContent () {
-        this.$emit('input', this.content)
+      // update parent component with the new input value
+      updateValue (value) {
+        this.$emit('input', value)
       }
     }
   }
