@@ -43,7 +43,7 @@
       // navigate to Search component if searchString is not empty
       goToSearch () {
         if (this.searchString) {
-          let route = '/search/' + this.searchString.toLowerCase().replace(/ /g, '-')
+          let route = '/search/' + this.searchString.replace(/ /g, '-')
           this.$router.push(route)
         }
       }

@@ -33,7 +33,7 @@ export default new Router({
     },
 
     {
-      path: '/concept/:id',
+      path: '/concept/:conceptId',
       component: Concept,
       props: true
     }

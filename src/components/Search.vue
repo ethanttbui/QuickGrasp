@@ -2,9 +2,9 @@
   <section class="hero is-primary is-bold is-fullheight">
     <div class="hero-body">
       <div class="container">
-        <div class="box" v-for="result in searchResults">
-          <a v-text="result.name"></a>
-          <div v-html="result.explanation"></div>
+        <div class="box" v-for="(concept, conceptId) in searchResults">
+          <router-link :to="'/concept/' + conceptId" v-text="concept.name"></router-link>
+          <div v-html="concept.bestExplanation"></div>
         </div>
       </div>
     </div>
@@ -25,7 +25,7 @@
     },
 
     created () {
-      // normalize and set search string
+      // normalize search string
       let searchString = this.searchKey.replace(/-/g, ' ')
 
       let self = this

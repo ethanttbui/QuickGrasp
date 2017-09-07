@@ -7,7 +7,9 @@
           <p class="title is-5">Top Concepts</p>
           <div class="box">
             <div class="columns is-multiline">
-              <div class="column is-3" v-for="concept in topConcepts"><a href="#" v-text="concept.name"></a></div>
+              <div class="column is-3" v-for="(concept, conceptId) in topConcepts">
+                <router-link :to="'/concept/' + conceptId" v-text="concept.name"></router-link>
+              </div>
             </div>
           </div>
 

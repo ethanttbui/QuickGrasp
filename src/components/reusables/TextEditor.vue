@@ -47,7 +47,7 @@
       let quill = new Quill('#editor', config)
       quill.root.innerHTML = this.value
 
-      // bind the editor's html content to the value prop
+      // bind the editor's html content to value prop
       // only update editor content if the new value does not come from the editor itself
       this.$watch('value', function (newValue, oldValue) {
         if (quill.root.innerHTML !== newValue) {
@@ -116,7 +116,7 @@ by Quill are not within the scope of this component -->
   .ql-editor {
     border: 1px solid $grey-lighter;
     border-radius: 0 0 3px 3px;
-    text-align: justify; 
+    text-align: justify;
 
     &:before {
       font-style: normal !important;

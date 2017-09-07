@@ -71,9 +71,9 @@ export class SearchHttp {
     })
 
     // retrieve the final search results using the matching documents' refs
-    let searchResults = []
+    let searchResults = {}
     for (let doc of matchingDocs) {
-      searchResults.push(data[doc.ref])
+      searchResults[doc.ref] = data[doc.ref]
     }
 
     return searchResults
@@ -85,6 +85,19 @@ export class SearchHttp {
       conceptsRef.once('value', function (snapshot) {
         let searchResults = self._elasticLunr(snapshot.val(), searchString)
         resolve(searchResults)
+      }, function (error) {
+        reject(error)
+      })
+    })
+  }
+}
+
+// http class for Concept component
+export class ConceptHttp {
+  getConcept (conceptId) {
+    return new Promise(function (resolve, reject) {
+      conceptsRef.child(conceptId).once('value', function (snapshot) {
+        resolve(snapshot.val())
       }, function (error) {
         reject(error)
       })
