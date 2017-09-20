@@ -9,7 +9,7 @@
         </div>
 
         <div class="box">
-          <text-editor label="Explain this concept:" v-model="newExplanation"></text-editor>
+          <text-editor label="Explain this concept:" :error="validator.getError('explanation')" @input="validator.clearError('explanation')" v-model="newExplanation"></text-editor>
           <div class="field is-grouped">
             <div class="control">
               <a class="button">
@@ -17,7 +17,7 @@
               </a>
             </div>
             <div class="control">
-              <a class="button is-warning">
+              <a class="button is-warning" @click="validateAndSubmit">
                 Submit
               </a>
             </div>
@@ -31,6 +31,7 @@
 <script>
   import TextEditor from '@/components/reusables/TextEditor'
   import { ConceptHttp } from '@/js/http'
+  import Validator from '@/js/validate'
 
   export default {
     props: ['conceptId'],
@@ -42,6 +43,7 @@
     data () {
       return {
         http: new ConceptHttp(),
+        validator: new Validator(['explanation']),
         concept: {},
         newExplanation: ''
       }
@@ -56,6 +58,21 @@
         .catch(function (error) {
           console.log(error)
         })
+    },
+
+    methods: {
+      validateAndSubmit () {
+        this.validator.validate(['required'], 'explanation', this.newExplanation)
+        if (!this.validator.hasError()) {
+          this.http.addExplanation(this.conceptId, this.newExplanation)
+            .then(function () {
+              console.log('Explanation added successfully')
+            })
+            .catch(function (error) {
+              console.log(error)
+            })
+        }
+      }
     }
   }
 </script>

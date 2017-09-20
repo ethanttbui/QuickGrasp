@@ -12,18 +12,29 @@ const config = {
 
 const firebaseApp = Firebase.initializeApp(config)
 const db = firebaseApp.database()
+
 const conceptsRef = db.ref('concepts')
+const explanationsRef = db.ref('explanations')
 
 // http class for Explain component
 export class ExplainHttp {
   addConcept (name, category, explanation) {
-    return conceptsRef.push({
+    // push new concept to concept list
+    let newConceptRef = conceptsRef.push({
       name: name,
       category: category,
       bestExplanation: explanation,
       viewCount: 1,
       timestamp: Firebase.database.ServerValue.TIMESTAMP
     })
+
+    // push the new entry with the same id as the new concept to explanation list
+    explanationsRef.child(newConceptRef.key).push({
+      author: '',
+      content: explanation
+    })
+
+    return newConceptRef
   }
 }
 
@@ -101,6 +112,13 @@ export class ConceptHttp {
       }, function (error) {
         reject(error)
       })
+    })
+  }
+
+  addExplanation (conceptId, content) {
+    return explanationsRef.child(conceptId).push({
+      author: '',
+      content: content
     })
   }
 }
